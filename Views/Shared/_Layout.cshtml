@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/StyleSheet.css" type="text/css" />
+</head>
+<body class="bg-body min-vh-100 p-3 d-flex flex-column justify-content-center align-items-center">
+	<div class="container h-100 p-3 bg-danger bg-gradient rounded-3">@RenderBody()</div>
+	<script src="~/bootstrap/js/bootstrap.min.js" async></script>
+	<script src="~/JSPokemonAPI.js" async></script>
+</body>
+</html>

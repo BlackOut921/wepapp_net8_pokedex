@@ -1,0 +1,38 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+
+<div class="d-flex flex-row align-items-center mb-3">
+	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="d-inline-block">
+		<circle r="100" cx="100" cy="100" fill="rgb(50, 50, 50)"></circle>
+	</svg>
+	<img src="" alt="Pokemon sprite" id="imgSprite" class="img-fluid mx-auto d-inline-block" />
+</div>
+
+<div class="d-flex flex-row gap-1 mb-3">
+	<button type="button" class="btn btn-dark" id="btnPrev">Prev</button>
+	<div class="input-group">
+		<input type="text" placeholder="Enter Pokemon name" id="txtInput" class="form-control" />
+		<button type="button" id="btnSearch" class="btn btn-outline-light">Search</button>
+	</div>
+	<button type="button" class="btn btn-dark" id="btnNext">Next</button>
+</div>
+
+<div class="container-fluid mb-3">
+	<h3 class="display-3" id="txtName"></h3>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Move name</th>
+			</tr>
+		</thead>
+		<tbody id="moveListTable">
+			<tr>
+				<td>-1</td>
+				<td>null</td>
+			</tr>
+			<!-- move list here -->
+		</tbody>
+	</table>
+</div>
