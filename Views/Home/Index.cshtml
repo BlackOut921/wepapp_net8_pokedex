@@ -2,11 +2,11 @@
 	ViewData["Title"] = "Index";
 }
 
-<div class="d-flex flex-row align-items-center mb-3">
-	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="d-inline-block">
+<div class="d-flex flex-row justify-content-start align-items-center mb-3">
+	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="d-inline-block visually-hidden">
 		<circle r="100" cx="100" cy="100" fill="rgb(50, 50, 50)"></circle>
 	</svg>
-	<img src="" alt="Pokemon sprite" id="imgSprite" class="img-fluid mx-auto d-inline-block" />
+	<img src="" alt="Pokemon sprite" id="imgSprite" class="img-fluid d-block bg-dark rounded-circle p-5" />
 </div>
 
 <div class="d-flex flex-row gap-1 mb-3">
@@ -20,19 +20,37 @@
 
 <div class="container-fluid mb-3">
 	<h3 class="display-3" id="txtName"></h3>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Move name</th>
-			</tr>
-		</thead>
-		<tbody id="moveListTable">
-			<tr>
-				<td>-1</td>
-				<td>null</td>
-			</tr>
-			<!-- move list here -->
-		</tbody>
-	</table>
+	<div class="accordion" id="statsAccordion">
+		<!-- BLANK LIST -->
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button type="button" class="accordion-button"
+						data-bs-toggle="collapse" data-bs-target="#statsList"
+						aria-expanded="true" aria-controls="statsList">
+					stat List
+				</button>
+			</h2>
+			<div class="accordion-collapse collapse show" id="statsList" data-bs-parent="#statsAccordion">
+				<div class="accordion-body">
+					_body
+				</div>
+			</div>
+		</div>
+
+		<!-- Move List -->
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button type="button" class="accordion-button collapsed"
+						data-bs-toggle="collapse" data-bs-target="#statsMoves"
+						aria-expanded="false" aria-controls="statsMoves">
+					Move List
+				</button>
+			</h2>
+			<div class="accordion-collapse collapse" id="statsMoves" data-bs-parent="#statsAccordion">
+				<div class="accordion-body">
+					<!-- move list from javascript -->
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

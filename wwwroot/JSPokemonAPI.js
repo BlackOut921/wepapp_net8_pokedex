@@ -25,38 +25,35 @@ async function FetchPokemon(searchString) {
         const data = await response.json();
         currentIndex = data.id;
 
-        //Keeps ids to 3 digit numbers
+        //Keeps id to 3 digit numbers
         let test = currentIndex >= 100 ? "" : currentIndex >= 10 ? "0" : "00";
         //Capitalise first letter (converted to lower case for search)
         let name = (data.name).charAt(0).toUpperCase() + data.name.slice(1);
-
         //Change title
         txtName.innerHTML = `#${test + currentIndex} - ${name}`;
         //Change sprite image
         imgSprite.src = data.sprites.front_default;
 
-        const table = document.getElementById("moveListTable");
-        const moveList = data.moves; //JSON
-        const m = data.moves.map(i => i.move.name).sort(); //Get names and sort
-        const count = m.length; //Length
+        //Create table
+        const table = document.createElement("table");
+        table.classList = "table table-hover";
+        const tableBody = table.createTBody(); //Add tbody
 
-        //TABLE ROWS NEED CLEARING FIRST!!!!!
+        //Get move names from JSON and sort A->Z and create rows for each
+        const moveList = data.moves.map(m => m.move.name).sort();
+        //Reverse for loop
+        for (let r = moveList.length - 1; r > 0; r--) {
+            const newRow = tableBody.insertRow(0);
 
-        for (let c = 0; c < count; c++) {
-            //Create row
-            const row = document.createElement("tr");
+            const cellId = newRow.insertCell(0);
+            cellId.innerHTML = r;
 
-            //Create table cells
-            const cellMoveId = document.createElement("td");
-            cellMoveId.innerText = c;
-            row.appendChild(cellMoveId);
-
-            const cellMoveName = document.createElement("td");
-            cellMoveName.innerText = m[c];
-            row.appendChild(cellMoveName);
-
-            table.appendChild(row);
+            const cellName = newRow.insertCell(1);
+            cellName.innerHTML = moveList[r];
         }
+
+        const statsMovesInner = document.getElementById("statsMoves").firstElementChild;
+        statsMovesInner.replaceChildren(table);
     }
     catch (e) {
         console.error(e);
