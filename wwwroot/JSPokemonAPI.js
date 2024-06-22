@@ -14,7 +14,28 @@ let currentIndex = 1;
 
 //##### function declarations #####
 
-async function FetchPokemon(searchString) {
+//Test
+function CreateTable(classList = "table", data) {
+    const table = document.createElement("table");
+    table.classList = classList;
+
+    //Loop through rows
+    for (let y = 0; y < data.length; y++) {
+        const row = table.insertRow(y);
+
+        //Create column cell for each property and value
+        const properties = Object.keys(data[y]);
+        const values = Object.values(data[y]);
+        for (let x = 0; x < properties.length; x++) {
+            const cell = row.insertCell();
+            cell.innerHTML = values[x];
+        }
+    }
+
+    return table;
+}
+
+async function FetchPokemonAsync(searchString) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon${searchString.toLowerCase()}`);
 
@@ -41,6 +62,7 @@ async function FetchPokemon(searchString) {
 
         //Get move names from JSON and sort A->Z and create rows for each
         const moveList = data.moves.map(m => m.move.name).sort();
+
         //Reverse for loop
         for (let r = moveList.length - 1; r > 0; r--) {
             const newRow = tableBody.insertRow(0);
@@ -52,8 +74,23 @@ async function FetchPokemon(searchString) {
             cellName.innerHTML = moveList[r];
         }
 
+        //Get base stats
+        const statsData = [];
+        for (let i = 0; i < data.stats.length; i++) {
+            const d = data.stats[i];
+            statsData.push({ name: d.stat.name, value: d.base_stat });
+        }
+        const statsList = document.getElementById("statsList").firstElementChild;
+        statsList.replaceChildren(CreateTable("table", statsData));
+
+        //Get move list
+        const tableData = [];
+        for (let i = 0; i < moveList.length; i++) {
+            tableData.push({ id: i, name: moveList[i] });
+        }
         const statsMovesInner = document.getElementById("statsMoves").firstElementChild;
-        statsMovesInner.replaceChildren(table);
+        //statsMovesInner.replaceChildren(table);
+        statsMovesInner.replaceChildren(CreateTable("table", tableData));
     }
     catch (e) {
         console.error(e);
@@ -66,7 +103,7 @@ function PrevPokemon() {
     }
 
     currentIndex--;
-    FetchPokemon(`/${currentIndex}`)
+    FetchPokemonAsync(`/${currentIndex}`)
 }
 
 function NextPokemon() {
@@ -75,14 +112,13 @@ function NextPokemon() {
     }
 
     currentIndex++;
-    FetchPokemon(`/${currentIndex}`)
+    FetchPokemonAsync(`/${currentIndex}`)
 }
 
 
 //##### main #####
+FetchPokemonAsync(`/${currentIndex}`); //id=1
 
-FetchPokemon(`/${currentIndex}`); //id=1
-
-btnSearch.addEventListener("click", () => FetchPokemon("/" + txtInput.value));
+btnSearch.addEventListener("click", () => FetchPokemonAsync("/" + txtInput.value));
 btnPrev.addEventListener("click", () => PrevPokemon());
 btnNext.addEventListener("click", () => NextPokemon());
