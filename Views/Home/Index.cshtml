@@ -2,32 +2,32 @@
 	ViewData["Title"] = "Index";
 }
 
-<div class="d-flex flex-row justify-content-start align-items-center mb-3">
-	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" class="d-inline-block visually-hidden">
-		<circle r="100" cx="100" cy="100" fill="rgb(50, 50, 50)"></circle>
-	</svg>
-	<img src="" alt="Pokemon sprite" id="imgSprite" class="img-fluid d-block bg-dark rounded-circle p-5" />
-</div>
-
+<!-- Search -->
 <div class="d-flex flex-row gap-1 mb-3">
-	<button type="button" class="btn btn-dark" id="btnPrev">Prev</button>
+	<button type="button" class="btn btn-outline-dark" id="btnPrev">Prev</button>
 	<div class="input-group">
 		<input type="text" placeholder="Enter Pokemon name" id="txtInput" class="form-control" />
 		<button type="button" id="btnSearch" class="btn btn-outline-light">Search</button>
 	</div>
-	<button type="button" class="btn btn-dark" id="btnNext">Next</button>
+	<button type="button" class="btn btn-outline-dark" id="btnNext">Next</button>
 </div>
 
+<!-- sprite and name-->
+<div class="d-flex flex-row align-items-center gap-3">
+	<img src="" alt="Pokemon sprite" id="imgSprite" class="img-fluid d-block bg-light rounded-circle p-5 mb-3" />
+	<h3 class="display-3" id="txtName">_name</h3>
+</div>
+
+<!-- Details -->
 <div class="container-fluid mb-3">
-	<h3 class="display-3" id="txtName"></h3>
 	<div class="accordion" id="statsAccordion">
-		<!-- BLANK LIST -->
+		<!-- Base Stats -->
 		<div class="accordion-item">
 			<h2 class="accordion-header">
 				<button type="button" class="accordion-button"
 						data-bs-toggle="collapse" data-bs-target="#statsList"
 						aria-expanded="true" aria-controls="statsList">
-					Stats
+					Base Stats
 				</button>
 			</h2>
 			<div class="accordion-collapse collapse show" id="statsList" data-bs-parent="#statsAccordion">
@@ -48,7 +48,7 @@
 			</h2>
 			<div class="accordion-collapse collapse" id="statsMoves" data-bs-parent="#statsAccordion">
 				<div class="accordion-body">
-					<!-- move list from javascript -->
+					_body
 				</div>
 			</div>
 		</div>

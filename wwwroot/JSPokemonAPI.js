@@ -19,6 +19,8 @@ function CreateTable(classList = "table", data) {
     const table = document.createElement("table");
     table.classList = classList;
 
+    table.createTBody();
+
     //Loop through rows
     for (let y = 0; y < data.length; y++) {
         const row = table.insertRow(y);
@@ -55,24 +57,8 @@ async function FetchPokemonAsync(searchString) {
         //Change sprite image
         imgSprite.src = data.sprites.front_default;
 
-        //Create table
-        const table = document.createElement("table");
-        table.classList = "table table-hover";
-        const tableBody = table.createTBody(); //Add tbody
-
         //Get move names from JSON and sort A->Z and create rows for each
         const moveList = data.moves.map(m => m.move.name).sort();
-
-        //Reverse for loop
-        for (let r = moveList.length - 1; r > 0; r--) {
-            const newRow = tableBody.insertRow(0);
-
-            const cellId = newRow.insertCell(0);
-            cellId.innerHTML = r;
-
-            const cellName = newRow.insertCell(1);
-            cellName.innerHTML = moveList[r];
-        }
 
         //Get base stats
         const statsData = [];
@@ -81,7 +67,7 @@ async function FetchPokemonAsync(searchString) {
             statsData.push({ name: d.stat.name, value: d.base_stat });
         }
         const statsList = document.getElementById("statsList").firstElementChild;
-        statsList.replaceChildren(CreateTable("table", statsData));
+        statsList.replaceChildren(CreateTable("table table-striped", statsData));
 
         //Get move list
         const tableData = [];
@@ -89,8 +75,7 @@ async function FetchPokemonAsync(searchString) {
             tableData.push({ id: i, name: moveList[i] });
         }
         const statsMovesInner = document.getElementById("statsMoves").firstElementChild;
-        //statsMovesInner.replaceChildren(table);
-        statsMovesInner.replaceChildren(CreateTable("table", tableData));
+        statsMovesInner.replaceChildren(CreateTable("table table-striped", tableData));
     }
     catch (e) {
         console.error(e);
